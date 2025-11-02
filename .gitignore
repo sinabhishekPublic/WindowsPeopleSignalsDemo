@@ -1,0 +1,24 @@
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.opendb
+*.pdb
+*.VC.db
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+artifacts/
+
+# Others
+*.Cache
+*.DS_Store
+Thumbs.db

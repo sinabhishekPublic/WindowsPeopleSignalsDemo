@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="PeopleSignalsPOC.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:PeopleSignalsPOC"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Orientation="Horizontal" Spacing="12" Padding="16">
+            <TextBlock
+                Text="Windows People Signals (Contact &amp; Annotation)"
+                FontSize="24"
+                FontWeight="SemiBold"/>
+        </StackPanel>
+
+        <!-- Actions -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="12" Padding="16">
+            <Button Content="Create Contact" Click="BtnCreateContact_Click"/>
+
+            <AppBarSeparator Width="12"/>
+
+            <TextBlock Text="Category:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="CategoryBox" Width="140" SelectedIndex="0">
+                <ComboBoxItem Content="chat"/>
+                <ComboBoxItem Content="call"/>
+                <ComboBoxItem Content="share"/>
+                <ComboBoxItem Content="collaboration"/>
+            </ComboBox>
+
+            <TextBlock Text="Action:" VerticalAlignment="Center" Margin="8,0,0,0"/>
+            <ComboBox x:Name="ActionBox" Width="140" SelectedIndex="0">
+                <ComboBoxItem Content="send"/>
+                <ComboBoxItem Content="receive"/>
+                <ComboBoxItem Content="start"/>
+                <ComboBoxItem Content="end"/>
+                <ComboBoxItem Content="comment"/>
+            </ComboBox>
+
+            <Button Content="Add Activity" Click="BtnAddActivity_Click" Margin="8,0,0,0"/>
+            <Button Content="Show All Annotations" Click="BtnShowAll_Click"/>
+            <Button Content="Delete All Annotations" Click="BtnDeleteAll_Click"/>
+            <Button Content="Delete Contact" Click="BtnDeleteContact_Click"/>
+        </StackPanel>
+
+        <!-- Annotation list -->
+        <Grid Grid.Row="2" Padding="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Saved Activity Annotations" FontWeight="SemiBold"/>
+            <ListView Grid.Row="1" x:Name="AnnoList" SelectionMode="None">
+                <ListView.Header>
+                    <Grid Padding="8" Background="{ThemeResource SystemControlPageBackgroundAltHighBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="320"/>
+                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="220"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="RemoteId" Grid.Column="0" FontWeight="SemiBold"/>
+                        <TextBlock Text="Category" Grid.Column="1" FontWeight="SemiBold"/>
+                        <TextBlock Text="Action" Grid.Column="2" FontWeight="SemiBold"/>
+                        <TextBlock Text="Timestamp (UTC)" Grid.Column="3" FontWeight="SemiBold"/>
+                    </Grid>
+                </ListView.Header>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:AnnoView">
+                        <Grid Padding="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="320"/>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="220"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="{x:Bind RemoteId}" Grid.Column="0" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Text="{x:Bind Category}" Grid.Column="1"/>
+                            <TextBlock Text="{x:Bind Action}" Grid.Column="2"/>
+                            <TextBlock Text="{x:Bind TimestampIso}" Grid.Column="3"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <!-- Log -->
+        <Grid Grid.Row="3" Padding="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Log" FontWeight="SemiBold"/>
+            <ScrollViewer Grid.Row="1">
+                <TextBlock x:Name="LogText" FontFamily="Consolas"/>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

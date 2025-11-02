@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "PeopleSignalsPOC (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "PeopleSignalsPOC (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
